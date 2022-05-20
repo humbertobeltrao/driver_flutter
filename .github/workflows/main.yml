@@ -10,26 +10,24 @@ jobs:
     runs-on: macos-latest
     strategy:
       matrix:
-        api-level: [29]
-        target: [playstore]
-        sdk: [stable]
+        api-level: [21, 29]
+        target: [default]
     steps:
       - uses: actions/checkout@v2
       - uses: subosito/flutter-action@v1
         with:
-          flutter-version: '2.8.1'
+          flutter-version: '2.0.2'
           channel: 'stable'
-
-      # Run integration test
-      - name: Run Flutter Driver tests
+      - name: "Run Flutter Driver tests"
+        #Operation for installing, configuring and running Android emulator (MAC OS only)
+        # https://github.com/marketplace/actions/android-emulator-runner
         uses: reactivecircus/android-emulator-runner@v2
         with:
-          target: ${{ matrix.target }}
           api-level: ${{ matrix.api-level }}
+          target: ${{ matrix.target }}
           arch: x86_64
           profile: Nexus 6
-          script: flutter drive --driver=test_driver/integration_test.dart --target=integration_test/app_test.dart
-
+          script: "flutter drive --driver=test_driver/integration_test.dart --target=integration_test/app_test.dart"
       # Update screenshot to artifact
       - name: Upload screenshots
         if: always()
