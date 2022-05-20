@@ -12,6 +12,7 @@ jobs:
       matrix:
         api-level: [29]
         target: [playstore]
+        sdk: [2.17.0]
     steps:
       - uses: actions/checkout@v2
       - uses: subosito/flutter-action@v1
