@@ -4,13 +4,16 @@ import 'package:integration_test/integration_test.dart';
 import 'package:dirver_action/main.dart' as app;
 
 void main() {
+  final binding = IntegrationTestWidgetsFlutterBinding();
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
 
-  group('end-to-end test', () {
-    testWidgets('tap on the floating action button, verify counter',
-        (tester) async {
+  group('increment', () {
+    testWidgets('success', (WidgetTester tester) async {
       app.main();
+      await binding.convertFlutterSurfaceToImage();
       await tester.pumpAndSettle();
+
+      await binding.takeScreenshot('test-screenshot');
 
       // Verify the counter starts at 0.
       expect(find.text('0'), findsOneWidget);
