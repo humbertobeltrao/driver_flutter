@@ -1,7 +1,9 @@
 on:
+  push:
+    branches: [ master ]
   workflow_dispatch:
   schedule:
-    - cron: '21 21 * * *' # Every day at midni
+    - cron: '24 21 * * *' # Every day at midni
 name: Flutter integration test
 jobs:
   drive_android:
