@@ -1,9 +1,7 @@
 on:
-  push:
-    tags-ignore:
-      - '**'
-    branches:
-      - '**'
+  workflow_dispatch:
+  schedule:
+    - cron: '21 21 * * *' # Every day at midni
 name: Flutter integration test
 jobs:
   drive_android:
